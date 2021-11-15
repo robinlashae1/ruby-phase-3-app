@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import displayPanel from './panel';
 import allJobs from './allJobs';
 import headerPanel from './headerPanel';
@@ -9,9 +8,9 @@ function App() {
     <div className="App">
       <headerPanel/>
       <allJobs/>
-     <displayPanel title="waiting to hear from" />
+     <displayPanel title="waiting to hear from"/>
      <displayPanel title="interview"/>
-     <displayPanel title ="offer"/>
+     <displayPanel title="offer"/>
     </div>
   );
 }

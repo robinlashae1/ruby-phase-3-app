@@ -2,16 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -39,4 +29,17 @@
 .offer{
   display:flex;
   color: black
+}
+.displayPanels{
+  width: 25%;
+  float: left;
+  padding: 20px;
+  border: 2px solid red;
+  background: blue
+}
+#allJobs{
+  width: 25%;
+  padding: 20px;
+  border: 2px solid black;
+  background-color: red;
 }
