@@ -3,7 +3,7 @@ import React from 'react';
  function displayPanel({title}){
 
     return(
-        <div>
+        <div className="displayPanels">
         <h1>{title}</h1>
         <jobCaterogy/>
         </div>
