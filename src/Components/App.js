@@ -30,11 +30,12 @@ function App() {
   return (
     <div className="App">
       <Header handleSearch={handleSearch}/>
+      <div id="jobDisplay">
       <JobContainer jobData={searchFilter}/>
      <DisplayPanel title="waiting to hear from"/>
      <DisplayPanel title="interview"/>
      <DisplayPanel title="offer"/>
-     
+     </div>
     </div>
   );
 }
