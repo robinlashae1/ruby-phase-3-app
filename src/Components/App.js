@@ -31,36 +31,18 @@ function App() {
     setSearchFilter(filtered)
   }
   //experminting with sorting
-const handleSort = (e) => {
-sortedJobs = jobData.filter((jobs)=>{
-  return jobs.status.includes(e.target.value)
-}) 
-setSortedJobs(sortedJobs)
-}
-const handleCategory=(jobData)=>{
-  const jobPendingPanel= jobData.map((job)=> {
-    if (job.status === "pending"){
-      return pendingJobs.push(job)
-    }
-    else if (job.status==="offer"){
-      return offerJobs.push(job)
-    }
-  })
-  setPendingJobs(pendingJobs);
-  setOfferJobs(offerJobs)
-}
-console.log(pendingJobs);
+
 
   return (
     <div className="App">
       <Header handleSearch={handleSearch}/>
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter} handleSearch={handleSort}/>
-     <DisplayPanel title="waiting to hear from" filterJobs={handleCategory}/>
-     <DisplayPanel title="interview" filterJobs={handleCategory}/>
-     <DisplayPanel title="offer" filterJobs={handleCategory}/>
-     <DisplayPanel title="Wishlist"/>
-     <DisplayPanel title="Rejected"/>
+      <JobContainer jobData={searchFilter} />
+     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending"/>
+     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing"/>
+     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made"/>
+     <DisplayPanel title="Wishlist" jobData={searchFilter} status=""/>
+     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected"/>
      </div>
     </div>
   );

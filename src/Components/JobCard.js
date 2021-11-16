@@ -11,7 +11,7 @@ function JobCard({job}) {
             <img src={job.logo_url} alt="Company logo" className="cardImage"/>
             <h3 className="jobText">{job.company}</h3>
             <h4>{job.position}</h4>
-                 <select onchange={handleChange} id="select-button">
+                 <select onChange={handleChange} id="select-button">
                 <option value="default" disabled hidden>Update?</option>
                  <option value="1" className="dropdownitem">Wishlist</option>
                  <option value="2" className="dropdownitem">Applied</option>
