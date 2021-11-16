@@ -10,6 +10,7 @@ function LoginForm() {
   const [message, setMessage] = useState();
   const [userId, setUserId] = useState(localStorage.getItem('user_id'));
   const [createUser, setCreateUser] = useState(false);
+  const [disableForm, setDisableForm] = useState(false);
   
   const resetLoginData = () => {
     setLoginData({username: '', password: '', passwordConfirm: ''})
@@ -30,6 +31,7 @@ function LoginForm() {
       },
       body: JSON.stringify(loginData)
     };
+    setDisableForm(true);
     fetch('http://localhost:9292/users/login', options)
       .then(resp => resp.json())
       .then(data => {
@@ -43,6 +45,7 @@ function LoginForm() {
         } else {
           setMessage('Invalid login credentials.');
         }
+        setDisableForm(false);
       });
   };
 
@@ -59,6 +62,7 @@ function LoginForm() {
       },
       body: JSON.stringify(loginData)
     };
+    setDisableForm(true);
     fetch('http://localhost:9292/users', options)
       .then(resp => resp.json())
       .then(data => {
@@ -69,10 +73,12 @@ function LoginForm() {
         } else {
           setMessage(data.message);
         }
+        setDisableForm(false);
       })
   };
 
   const handleLogout = () => {
+    setDisableForm(true);
     fetch(`http://localhost:9292/users/${localStorage.getItem('user_id')}/logout?login_token=${localStorage.getItem('login_token')}`)
       .then(resp => resp.json())
       .then(data => {
@@ -82,6 +88,7 @@ function LoginForm() {
         setMessage(null);
         setCreateUser(false);
         setUserId(null);
+        setDisableForm(false);
       });
   };
 
@@ -103,15 +110,15 @@ function LoginForm() {
         <form onSubmit={createUser ? handleCreateUser : handleLogin}>
           {message ? <div>{message}</div> : null}
           <label htmlFor="username">Username: </label>
-          <input type="text" id="username" name="username" placeholder="username" value={loginData.username} onChange={handleFormChange} />
+          <input type="text" id="username" name="username" placeholder="username" value={loginData.username} onChange={handleFormChange} disabled={disableForm} />
           <label htmlFor="password">Password: </label>
-          <input type="password" id="password" name="password" placeholder="password" value={loginData.password} onChange={handleFormChange} />
+          <input type="password" id="password" name="password" placeholder="password" value={loginData.password} onChange={handleFormChange} disabled={disableForm} />
           {createUser ? 
             <>
               <label htmlFor="passwordConfirm">Confirm Password: </label>
-              <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="confirm password" value={loginData.passwordConfirm} onChange={handleFormChange} />
+              <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="confirm password" value={loginData.passwordConfirm} onChange={handleFormChange} disabled={disableForm} />
             </> : null}
-          <input type="submit" value={createUser ? "Create User" : "Log In"} />
+          <input type="submit" value={createUser ? "Create User" : "Log In"} disabled={disableForm} />
         </form>
         <button onClick={handleCreateUserToggle}>
           {createUser ? "Already have an account?" : "Need an account?"}
@@ -122,7 +129,7 @@ function LoginForm() {
     form = (
       <>
         Welcome, {userValidation.username}
-        <button onClick={handleLogout}>Log Out</button>
+        <button onClick={handleLogout} disabled={disableForm}>Log Out</button>
       </>
     );
   }
