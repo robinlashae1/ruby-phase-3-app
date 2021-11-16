@@ -1,10 +1,11 @@
 import React from 'react';
-
- function DisplayPanel ({title}){
+import JobCard from './JobCard'
+ function DisplayPanel ({title, filteredJobs}){
 
     return(
         <div className= "displayPanels">
         <h3>{title}</h3>
+         {filteredJobs}
         </div>
     )
 
