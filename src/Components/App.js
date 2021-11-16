@@ -2,18 +2,30 @@ import JobContainer from "./JobContainer";
 import Header from "./Header";
 import {useEffect, useState} from 'react';
 import DisplayPanel from "./DisplayPanel";
+import ModalContainer from "./Modal/ModalContainer";
+import LoginForm from "./LoginForm"
 
 function App() {
   const [jobData, setJobData] = useState([])
+  const [communicationData, setCommunicationData] = useState([])
   const [searchFilter, setSearchFilter] = useState(jobData)
+  const [isModalOpen, setModalOpen] = useState(false)
+  // const [modalFilter, setModalFilter] = useState(communicationData)
 
   const API = 'http://localhost:9292/applications'
+  const apiComm = 'http://localhost:9292/communications'
 
   useEffect(() => {
     fetch(API)
       .then(response => response.json())
       .then(job => setJobData(job))
   }, [])
+
+   useEffect(() => {
+    fetch(apiComm)
+    .then(response => response.json())
+    .then(commData => setCommunicationData(commData))
+  },[])
 
   useEffect(() => {
     setSearchFilter(jobData)
@@ -26,12 +38,18 @@ function App() {
     setSearchFilter(filtered)
   }
 
+  const handleModal = () => {
+    setModalOpen(true)
+  }
+  
+
 
   return (
     <div className="App">
       <Header handleSearch={handleSearch}/>
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter}/>
+      <JobContainer jobData={searchFilter} communicationData={communicationData}/>
+      {/* <ModalContainer setModalOpen={setModalOpen} communicationData={communicationData}/> */}
      <DisplayPanel title="waiting to hear from"/>
      <DisplayPanel title="interview"/>
      <DisplayPanel title="offer"/>
@@ -41,3 +59,5 @@ function App() {
 }
 
 export default App;
+
+
