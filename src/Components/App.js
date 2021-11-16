@@ -10,6 +10,7 @@ function App() {
   const [communicationData, setCommunicationData] = useState([])
   const [searchFilter, setSearchFilter] = useState(jobData)
   const [isModalOpen, setModalOpen] = useState(false)
+  // const [modalFilter, setModalFilter] = useState(communicationData)
 
   const API = 'http://localhost:9292/applications'
   const apiComm = 'http://localhost:9292/communications'
@@ -40,13 +41,14 @@ function App() {
   const handleModal = () => {
     setModalOpen(true)
   }
+  
 
 
   return (
     <div className="App">
       <Header handleSearch={handleSearch}/>
       <LoginForm />
-      <JobContainer handleModal={handleModal} jobData={searchFilter}/>
+      <JobContainer communicationData={communicationData} handleModal={handleModal} jobData={searchFilter}/>
       {isModalOpen && <ModalContainer setModalOpen={setModalOpen} communicationData={communicationData} />}
      <DisplayPanel title="waiting to hear from"/>
      <DisplayPanel title="interview"/>
