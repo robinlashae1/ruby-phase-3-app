@@ -1,9 +1,12 @@
 
 import {useEffect, useState} from 'react';
+import Star from '@mui/icons-material/Star';
+import ListItemIcon from '@mui/material/ListItemIcon'
 
 function JobCard({job, communicationData, updateJob}) {
     const [value, setValue] = useState("default")
     const [dropdownDisabled, setDropdownDisabled] = useState(false);
+    // const [likeStar, setLikeStar] = useState(false);
 
     const handleChange = (e) => {
         const options = {
@@ -35,8 +38,39 @@ function JobCard({job, communicationData, updateJob}) {
     function handleCommunication () {
         setDisplayCommunication(!displayCommunication)
     }
+
+     const handleLikeClick = (e) => {
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_id: localStorage.getItem('user_id'),
+                login_token: localStorage.getItem('login_token'),
+                favorite: !job.favorite
+            })
+        };
+        // setLikeStar(true);
+        fetch(`http://localhost:9292/applications/${job.id}`, options)
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                if (data.success) {
+                    updateJob(data.data);
+                } else {
+                    console.log(data);
+                }
+                // setLikeStar(false);
+            });
+    }
+
+
     return (
         <div className="jobCards">
+             <ListItemIcon className="star">
+                {<Star onClick={handleLikeClick} className={ job.favorite ? "star-color" : null}/>} 
+            </ListItemIcon>
             <img src={job.logo_url} alt="Company logo" className="cardImage"  onClick={handleCommunication} />
             <h3 className="jobText">{job.company}</h3>
 
