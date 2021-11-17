@@ -2,7 +2,7 @@ import JobContainer from "./JobContainer";
 import Header from "./Header";
 import {useEffect, useState} from 'react';
 import DisplayPanel from "./DisplayPanel";
-import ModalContainer from "./Modal/ModalContainer";
+import Modal from "./Modal/Modal";
 import LoginForm from "./LoginForm"
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   const[offerJobs,setOfferJobs]=useState([])
   const[rejectedJobs,setRejectedJobs]=useState([])
   const[sortedJobs,setSortedJobs]=useState([])
-  const [isModalOpen, setModalOpen] = useState(false)
+  const [modal, setModal] = useState()
   // const [modalFilter, setModalFilter] = useState(communicationData)
   const [userId, setUserId] = useState(localStorage.getItem('user_id'));
 
@@ -37,6 +37,10 @@ function App() {
     setSearchFilter(jobData)
   },[jobData])
 
+  const addJob = (newJob) => {
+    setJobData(currentJobData => [...currentJobData, newJob]);
+  }
+
   const updateJob = (updatedJob) => {
     setJobData(currentJobData => currentJobData.map(job => (
       job.id === updatedJob.id ? updatedJob : job
@@ -51,8 +55,9 @@ function App() {
   }
   //experminting with sorting
 
-  const handleModal = () => {
-    setModalOpen(true)
+  const handleModal = (modalName) => {
+    console.log(modalName);
+    setModal(modalName)
   }
   
   const handleUserIdUpdate = (newUserId) => {
@@ -61,7 +66,8 @@ function App() {
 
   return (
     <div className="App">
-      <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
+      {modal ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} /> : null}
+      <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
       <div id="jobDisplay">
       <JobContainer jobData={searchFilter} communicationData={communicationData} updateJob={updateJob} />
      <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending" communicationData={communicationData} updateJob={updateJob} />

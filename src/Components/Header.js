@@ -1,12 +1,13 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 
-function Header({handleSearch, userId, handleUserIdUpdate}) {
+function Header({handleSearch, userId, handleUserIdUpdate, handleModal}) {
     return (
         <div id="App-header">
             <h3>App Name</h3>
             <LoginForm userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
             <input onChange={handleSearch}  type="text" id="search" placeholder="Search" />
+            <button onClick={() => handleModal('jobForm')}>Add Job Posting</button>
         </div>
     )
 }
