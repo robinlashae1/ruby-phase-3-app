@@ -9,7 +9,7 @@ function Header({handleSearch, userId, handleUserIdUpdate, handleModal}) {
             <h3>App Track</h3>
             <LoginForm userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
             <input onChange={handleSearch}  type="text" id="search" placeholder="Search" />
-            <button onClick={() => handleModal('jobForm')}>Add Job Posting</button>
+            <button onClick={() => handleModal({name: 'jobForm', job: null})}>Add Job Posting</button>
         </div>
     )
 }

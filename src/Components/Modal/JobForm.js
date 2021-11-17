@@ -1,12 +1,13 @@
 import { useState } from "react";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-function JobForm({ handleModal, addJob }) {
+function JobForm({ handleModal, addJob, updateJob, job }) {
   const [jobFormData, setJobFormData] = useState({
-    company: '',
-    position: '',
-    status: 'wishlist',
-    logo_url: '',
-    favorite: false
+    company: job ? job.company : '',
+    position: job ? job.position : '',
+    status: job ? job.status : 'wishlist',
+    logo_url: job ? job.logo_url : '',
+    favorite: job ? job.favorite : false
   });
   const [message, setMessage] = useState();
   const [disabled, setDisabled] = useState(false);
@@ -14,7 +15,7 @@ function JobForm({ handleModal, addJob }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const options = {
-      method: 'POST',
+      method: job ? 'PATCH' : 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -25,18 +26,19 @@ function JobForm({ handleModal, addJob }) {
       })
     };
     setDisabled(true);
-    fetch(`http://localhost:9292/applications`, options)
+    const patchSuffix = job ? `/${job.id}` : '';
+    fetch(`http://localhost:9292/applications${patchSuffix}`, options)
       .then(resp => resp.json())
       .then(data => {
         console.log(data);
         if (data.success) {
-          addJob(data.data);
-          handleModal();
+          job ? updateJob(data.data) : addJob(data.data);
+          handleModal({});
         } else {
           setMessage(data.message);
           setDisabled(false);
         }
-      })
+      });
   }
 
   const handleFormChange = (e) => {
@@ -48,7 +50,7 @@ function JobForm({ handleModal, addJob }) {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <h4>Add Job Posting</h4>
+      <h4>{job ? 'Edit' : 'Add'} Job Posting</h4>
       {message ? <div>{message}</div> : null}
       <fieldset disabled={disabled}>
         <label htmlFor="company">Company:</label>
@@ -73,7 +75,10 @@ function JobForm({ handleModal, addJob }) {
         <label htmlFor="favorite">Favorite:</label>
         <input type="checkbox" id="favorite" name="favorite" checked={jobFormData.favorite} onChange={handleFormChange} />
         <br />
-        <input type="submit" value="Add Posting" />
+        <span class="form-actions">
+          <input type="submit" value={job ? "Edit Posting" : "Add Posting"} />
+          {job && <DeleteForeverIcon />}
+        </span>
       </fieldset>
     </form>
   );
