@@ -9,6 +9,11 @@ function App() {
   const [jobData, setJobData] = useState([])
   const [communicationData, setCommunicationData] = useState([])
   const [searchFilter, setSearchFilter] = useState(jobData)
+  const[pendingJobs,setPendingJobs]= useState([])
+  const[interviewJobs,setInterviewJobs]=useState([])
+  const[offerJobs,setOfferJobs]=useState([])
+  const[rejectedJobs,setRejectedJobs]=useState([])
+  const[sortedJobs,setSortedJobs]=useState([])
   const [isModalOpen, setModalOpen] = useState(false)
   // const [modalFilter, setModalFilter] = useState(communicationData)
   const [userId, setUserId] = useState(localStorage.getItem('user_id'));
@@ -38,6 +43,7 @@ function App() {
     })
     setSearchFilter(filtered)
   }
+  //experminting with sorting
 
   const handleModal = () => {
     setModalOpen(true)
@@ -52,11 +58,12 @@ function App() {
     <div className="App">
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter} communicationData={communicationData}/>
-      {/* <ModalContainer setModalOpen={setModalOpen} communicationData={communicationData}/> */}
-     <DisplayPanel title="waiting to hear from"/>
-     <DisplayPanel title="interview"/>
-     <DisplayPanel title="offer"/>
+      <JobContainer jobData={searchFilter} />
+     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending"/>
+     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing"/>
+     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made"/>
+     <DisplayPanel title="Wishlist" jobData={searchFilter} status=""/>
+     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected"/>
      </div>
     </div>
   );
