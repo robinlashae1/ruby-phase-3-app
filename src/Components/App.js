@@ -14,7 +14,7 @@ function App() {
   const[offerJobs,setOfferJobs]=useState([])
   const[rejectedJobs,setRejectedJobs]=useState([])
   const[sortedJobs,setSortedJobs]=useState([])
-  const [modal, setModal] = useState()
+  const [modal, setModal] = useState({})
   // const [modalFilter, setModalFilter] = useState(communicationData)
   const [userId, setUserId] = useState(localStorage.getItem('user_id'));
 
@@ -47,6 +47,16 @@ function App() {
     )));
   };
 
+  const addCommunication = (newCommunication) => {
+    setCommunicationData(currentCommunicationData => [...currentCommunicationData, newCommunication]);
+  };
+
+  const updateCommunication = (updatedCommunication) => {
+    setCommunicationData(currentCommunicationData => currentCommunicationData.map(communication => (
+      communication.id === updatedCommunication.id ? updatedCommunication : communication
+    )))
+  };
+
   const handleSearch = (e) => {
     const filtered = jobData.filter((job) => {
       return job.company.includes(e.target.value)
@@ -66,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      {modal ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} /> : null}
+      {modal.name ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} updateJob={updateJob} addCommunication={addCommunication} updateCommunication={updateCommunication} /> : null}
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
       <div id="jobDisplay">
         <JobContainer jobData={searchFilter.filter((job) => {return job.favorite})} communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />

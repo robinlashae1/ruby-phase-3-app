@@ -155,7 +155,6 @@ div.displayPanels {
 }
 .communication h4 svg {
   float: right;
-  color: rgb(139, 76, 76);
 }
 .communication svg {
   color: rgb(100, 100, 100);
@@ -202,7 +201,13 @@ div.displayPanels {
   color: rgba(255, 255, 255, 0.6);
   background-color: rgba(255, 255, 255, 0.2);
 }
-
+.form-actions input {
+  vertical-align: middle;
+}
+.form-actions svg {
+  float: right;
+  color: rgb(107, 55, 55);
+}
 .star {
   float: left;
   margin-left: 0%;

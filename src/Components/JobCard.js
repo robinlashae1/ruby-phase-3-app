@@ -79,9 +79,9 @@ function JobCard({job, communicationData, updateJob, handleModal}) {
                 <ListItemIcon className="star">
                     {<Star onClick={handleLikeClick} className={ job.favorite ? "star-color" : null}/>} 
                 </ListItemIcon>
-                <h3 className="jobText">{job.company} <EditIcon className="job-card-edit" /></h3>
+                <h3 className="jobText">{job.company} <EditIcon className="job-card-edit" onClick={() => handleModal({name: 'jobForm', job: job})} /></h3>
                 <h4>{job.position}</h4>
-                <button><AddCommentIcon /></button>
+                <button><AddCommentIcon onClick={() => handleModal({name: 'communicationForm', job: job, modal: null})} /></button>
                 <select onChange={handleChange} id="select-button" value={job.status} disabled={dropdownDisabled}>
                     <option value="wishlist" className="dropdownitem">Wishlist</option>
                     <option value="pending" className="dropdownitem">Applied</option>
@@ -95,7 +95,9 @@ function JobCard({job, communicationData, updateJob, handleModal}) {
                 {communicationData.map((data) => (
                     <div key={data.id} className="communication">
                         {data.received ? <CallReceivedIcon /> : <CallMadeIcon />}
-                        <h4>{data.comment}<DeleteForeverIcon /></h4>
+                        <h4>
+                            {data.comment}<EditIcon onClick={() => handleModal({name: 'communicationForm', job: job, communication: data})} />
+                        </h4>
                         <CalendarTodayIcon />
                         <span>{data.time.split("T")[0]}</span>
                     </div>
