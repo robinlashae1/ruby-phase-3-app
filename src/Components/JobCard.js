@@ -1,9 +1,15 @@
 
 import {useEffect, useState} from 'react';
 import Star from '@mui/icons-material/Star';
-import ListItemIcon from '@mui/material/ListItemIcon'
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import CallMadeIcon from '@mui/icons-material/CallMade';
+import CallReceivedIcon from '@mui/icons-material/CallReceived';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-function JobCard({job, communicationData, updateJob}) {
+function JobCard({job, communicationData, updateJob, handleModal}) {
     const [value, setValue] = useState("default")
     const [dropdownDisabled, setDropdownDisabled] = useState(false);
     // const [likeStar, setLikeStar] = useState(false);
@@ -68,28 +74,35 @@ function JobCard({job, communicationData, updateJob}) {
 
     return (
         <div className="jobCards">
-             <ListItemIcon className="star">
-                {<Star onClick={handleLikeClick} className={ job.favorite ? "star-color" : null}/>} 
-            </ListItemIcon>
             <img src={job.logo_url} alt="Company logo" className="cardImage"  onClick={handleCommunication} />
-            <h3 className="jobText">{job.company}</h3>
-
-            <h4>{job.position}</h4>
-                 <select onChange={handleChange} id="select-button" value={job.status} disabled={dropdownDisabled}>
-                {/* <option value="default" disabled hidden>Update?</option> */}
-                 <option value="wishlist" className="dropdownitem">Wishlist</option>
-                 <option value="pending" className="dropdownitem">Applied</option>
-                <option value="interviewing" className="dropdownitem">Interviewing</option>
-                <option value="offer made" className="dropdownitem">Offer Made</option>
-                <option value="rejected" className="dropdownitem">Rejected</option>
-                 </select>
-                                {displayCommunication ? (
-            <div>
-                {communicationData.map((data) => {
-                    return <p>Comment: {data.comment} <p>Date Applied: {data.time.split("T")[0]}</p></p> })}
+            <div className="job-card-header">
+                <ListItemIcon className="star">
+                    {<Star onClick={handleLikeClick} className={ job.favorite ? "star-color" : null}/>} 
+                </ListItemIcon>
+                <h3 className="jobText">{job.company} <EditIcon className="job-card-edit" /></h3>
+                <h4>{job.position}</h4>
+                <button><AddCommentIcon /></button>
+                <select onChange={handleChange} id="select-button" value={job.status} disabled={dropdownDisabled}>
+                    <option value="wishlist" className="dropdownitem">Wishlist</option>
+                    <option value="pending" className="dropdownitem">Applied</option>
+                    <option value="interviewing" className="dropdownitem">Interviewing</option>
+                    <option value="offer made" className="dropdownitem">Offer Made</option>
+                    <option value="rejected" className="dropdownitem">Rejected</option>
+                </select>
             </div>
-                ) : (null)}
+            {displayCommunication ? (
+                <div className="job-card-communications">
+                {communicationData.map((data) => (
+                    <div key={data.id} className="communication">
+                        {data.received ? <CallReceivedIcon /> : <CallMadeIcon />}
+                        <h4>{data.comment}<DeleteForeverIcon /></h4>
+                        <CalendarTodayIcon />
+                        <span>{data.time.split("T")[0]}</span>
+                    </div>
+                ))}
                 </div>
+            ) : (null)}
+        </div>
     )
 }
 

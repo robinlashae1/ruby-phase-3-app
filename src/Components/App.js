@@ -69,13 +69,15 @@ function App() {
       {modal ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} /> : null}
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter.filter((job) => {return job.favorite})} communicationData={communicationData} updateJob={updateJob} />
-     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending" communicationData={communicationData} updateJob={updateJob} />
-     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing" communicationData={communicationData} updateJob={updateJob} />
-     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made" communicationData={communicationData} updateJob={updateJob} />
-     <DisplayPanel title="Wishlist" jobData={searchFilter} status="wishlist" communicationData={communicationData} updateJob={updateJob} />
-     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected" communicationData={communicationData} updateJob={updateJob} />
-     </div>
+        <JobContainer jobData={searchFilter.filter((job) => {return job.favorite})} communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
+        <div className="job-groups">
+          <DisplayPanel title="Applied" jobData={searchFilter}  status="pending" communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
+          <DisplayPanel title="Interviewing" jobData={searchFilter}  status="interviewing" communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
+          <DisplayPanel title="Offer Made" jobData={searchFilter}  status="offer made" communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
+          <DisplayPanel title="Wishlist" jobData={searchFilter} status="wishlist" communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
+          <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected" communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
+        </div>
+      </div>
     </div>
   );
 }
