@@ -63,7 +63,7 @@ function App() {
     <div className="App">
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter} communicationData={communicationData} updateJob={updateJob} />
+      <JobContainer jobData={searchFilter.filter((job) => {return job.favorite})} communicationData={communicationData} updateJob={updateJob} />
      <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending" communicationData={communicationData} updateJob={updateJob} />
      <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing" communicationData={communicationData} updateJob={updateJob} />
      <DisplayPanel title="offer" jobData={searchFilter}  status="offer made" communicationData={communicationData} updateJob={updateJob} />
