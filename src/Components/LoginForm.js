@@ -1,14 +1,14 @@
 import { useState } from "react";
 import useValidate from "../hooks/useValidate";
 
-function LoginForm() {
+function LoginForm({ userId, handleUserIdUpdate }) {
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
     passwordConfirm: ''
   });
   const [message, setMessage] = useState();
-  const [userId, setUserId] = useState(localStorage.getItem('user_id'));
+  // const [userId, setUserId] = useState(localStorage.getItem('user_id'));
   const [createUser, setCreateUser] = useState(false);
   const [disableForm, setDisableForm] = useState(false);
   
@@ -19,7 +19,7 @@ function LoginForm() {
   const setLoggedInUser = (data) => {
     localStorage.setItem('login_token', data.login_token);
     localStorage.setItem('user_id', data.user_id);
-    setUserId(data.user_id);
+    handleUserIdUpdate(data.user_id);
   };
 
   const handleLogin = (e) => {
@@ -87,7 +87,7 @@ function LoginForm() {
         resetLoginData();
         setMessage(null);
         setCreateUser(false);
-        setUserId(null);
+        handleUserIdUpdate(null);
         setDisableForm(false);
       });
   };
