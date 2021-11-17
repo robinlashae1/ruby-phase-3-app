@@ -1,11 +1,11 @@
 import React from 'react';
 import JobCard from './JobCard';
- function DisplayPanel ({title, jobData, status}){
+ function DisplayPanel ({title, jobData, status, communicationData}){
 const filteredJobs= jobData.filter((job)=>(
     job.status === status
 ))
 const jobCard = filteredJobs.map((job)=>(
-    <JobCard key={job.id} job={job} />
+    <JobCard key={job.id} job={job} communicationData={communicationData.filter((communication) => {return communication.application_id === job.id} )} />
 ))
     return(
         <div className= "displayPanels">

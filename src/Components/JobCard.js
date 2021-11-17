@@ -1,7 +1,7 @@
 
 import {useEffect, useState} from 'react';
 
-function JobCard({job}) {
+function JobCard({job, communicationData}) {
     const [value, setValue] = useState("default")
 
     const handleChange = (e) => {

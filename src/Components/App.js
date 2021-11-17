@@ -53,17 +53,18 @@ function App() {
     setUserId(newUserId);
   };
 
+  console.log(communicationData)
 
   return (
     <div className="App">
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter} />
-     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending"/>
-     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing"/>
-     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made"/>
-     <DisplayPanel title="Wishlist" jobData={searchFilter} status=""/>
-     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected"/>
+      <JobContainer jobData={searchFilter} communicationData={communicationData} />
+     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending" communicationData={communicationData} />
+     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing" communicationData={communicationData} />
+     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made" communicationData={communicationData} />
+     <DisplayPanel title="Wishlist" jobData={searchFilter} status="" communicationData={communicationData} />
+     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected" communicationData={communicationData} />
      </div>
     </div>
   );

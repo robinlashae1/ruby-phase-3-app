@@ -2,7 +2,7 @@ import React from 'react';
 import JobCard from './JobCard';
 
  function JobContainer ({jobData, handleModal, communicationData}){
-    
+    console.log(communicationData)
     return(
         <div id="allJobs">
             <h1>All Jobs</h1>
