@@ -1,6 +1,8 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 
+
+
 function Header({handleSearch, userId, handleUserIdUpdate, handleModal}) {
     return (
         <div id="App-header">
