@@ -37,6 +37,12 @@ function App() {
     setSearchFilter(jobData)
   },[jobData])
 
+  const updateJob = (updatedJob) => {
+    setJobData(currentJobData => currentJobData.map(job => (
+      job.id === updatedJob.id ? updatedJob : job
+    )));
+  };
+
   const handleSearch = (e) => {
     const filtered = jobData.filter((job) => {
       return job.company.includes(e.target.value)
@@ -53,18 +59,16 @@ function App() {
     setUserId(newUserId);
   };
 
-  console.log(communicationData)
-
   return (
     <div className="App">
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} />
       <div id="jobDisplay">
-      <JobContainer jobData={searchFilter} communicationData={communicationData} />
-     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending" communicationData={communicationData} />
-     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing" communicationData={communicationData} />
-     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made" communicationData={communicationData} />
-     <DisplayPanel title="Wishlist" jobData={searchFilter} status="" communicationData={communicationData} />
-     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected" communicationData={communicationData} />
+      <JobContainer jobData={searchFilter} communicationData={communicationData} updateJob={updateJob} />
+     <DisplayPanel title="waiting to hear from" jobData={searchFilter}  status="pending" communicationData={communicationData} updateJob={updateJob} />
+     <DisplayPanel title="interview" jobData={searchFilter}  status="interviewing" communicationData={communicationData} updateJob={updateJob} />
+     <DisplayPanel title="offer" jobData={searchFilter}  status="offer made" communicationData={communicationData} updateJob={updateJob} />
+     <DisplayPanel title="Wishlist" jobData={searchFilter} status="wishlist" communicationData={communicationData} updateJob={updateJob} />
+     <DisplayPanel title="Rejected" jobData={searchFilter} status="rejected" communicationData={communicationData} updateJob={updateJob} />
      </div>
     </div>
   );
