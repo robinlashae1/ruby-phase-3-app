@@ -1,8 +1,9 @@
 import React from 'react'
 import CommunicationForm from './CommunicationForm';
 import JobForm from './JobForm';
+import NewUserForm from './NewUserForm';
 
-function Modal({modal, handleModal, addJob, updateJob, addCommunication, updateCommunication}) {
+function Modal({modal, handleModal, addJob, updateJob, addCommunication, updateCommunication, handleUserIdUpdate}) {
     // const modalClose = () => {
     //     setModalOpen(false)
     // }
@@ -12,6 +13,8 @@ function Modal({modal, handleModal, addJob, updateJob, addCommunication, updateC
         content = <JobForm handleModal={handleModal} addJob={addJob} updateJob={updateJob} job={modal.job} />
     } else if (modal.name === 'communicationForm') {
         content = <CommunicationForm handleModal={handleModal} addCommunication={addCommunication} updateCommunication={updateCommunication} job={modal.job} communication={modal.communication} />
+    } else if (modal.name === 'newUserForm') {
+        content = <NewUserForm  handleModal={handleModal} handleUserIdUpdate={handleUserIdUpdate} />
     }
     return (
         <>

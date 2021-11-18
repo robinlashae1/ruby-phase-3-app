@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      {modal.name ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} updateJob={updateJob} addCommunication={addCommunication} updateCommunication={updateCommunication} /> : null}
+      {modal.name ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} updateJob={updateJob} addCommunication={addCommunication} updateCommunication={updateCommunication} handleUserIdUpdate={handleUserIdUpdate} /> : null}
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
       <div id="jobDisplay">
         <JobContainer jobData={searchFilter.filter((job) => {return job.favorite})} communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />
