@@ -14,7 +14,8 @@ function NewUserForm({ handleModal, handleUserIdUpdate }) {
     setUserFormData({
       username: '',
       password: '',
-      passwordConfirm: ''
+      passwordConfirm: '',
+      image_url: ''
     });
   };
 
@@ -64,6 +65,8 @@ function NewUserForm({ handleModal, handleUserIdUpdate }) {
       <fieldset disabled={disabled}>
         <label htmlFor="username">Username:</label>
         <input type="text" id="username" name="username" placeholder="username" value={userFormData.username} onChange={handleFormChange} />
+        <label htmlFor="image_url">Avatar Image:</label>
+        <input type="text" id="image_url" name="image_url" placeholder="image URL" value={userFormData.image_url} onChange={handleFormChange} />
         <label htmlFor="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="password" value={userFormData.password} onChange={handleFormChange} />
         <label htmlFor="passwordConfirm">Confirm:</label>
