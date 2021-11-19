@@ -25,8 +25,9 @@ function Header({handleSearch, userId, handleUserIdUpdate, handleModal}) {
             <LoginForm userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
           </Toolbar>
         </AppBar>
+        
       
-        <div className="search-bar b-radius" style={{border: "1px solid black"}}>
+        <div className="search-bar b-radius" style={{border: "2px solid black"}}>
             <TextField className="text" label="search" variant='standard' onChange={handleSearch}  ></TextField>
             <SearchIcon className="search-icon" />
         </div>

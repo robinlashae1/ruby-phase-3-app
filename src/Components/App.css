@@ -1,3 +1,7 @@
+/* * {
+  background: #c3b4a1;
+} */
+
 .modal-background {
   background-color: rgba(0, 0, 0, 0.514);
   position: fixed;
@@ -30,6 +34,10 @@ fieldset {
   border: 0;
 }
 
+.MuiToolbar-root {
+  background-color: #735151;
+}
+
 div.displayPanels {
   /* width: 23%; */
   height: 340px;
@@ -43,7 +51,9 @@ div.displayPanels {
   overflow-x: hidden;
   margin-bottom: 5px;
   border-radius: 10px 10px 10px 10px;
+  background-color: #adc5af;
   /* box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2); */
+  width: 334px;
 }
 div.displayPanels:hover {
   z-index: 1;
@@ -63,8 +73,9 @@ div.displayPanels:hover {
   margin-left: 10px;
   position: relative;
   overflow: overlay;
-  /* background-color: #464d77; */
+  background-color: #adc5af;
   border-radius: 20px 20px 20px 20px;
+  width: 354px;
 }
 #App-header {
   background-color: #f49d6e;
@@ -87,6 +98,11 @@ div.displayPanels:hover {
 }
 #jobDisplay {
   padding-top: 8px;
+  background-color: beige;
+}
+
+.MuiBox-root {
+  background-color: beige;
 }
 .job-groups {
   display: flex;
@@ -102,7 +118,7 @@ div.displayPanels:hover {
   white-space: normal;
   text-align: center;
   /* line-height: 1px; */
-  background-color: #e8ebf7;
+  background-color: #b4d8da;
   padding: 5px;
 }
 .job-card-header {
@@ -253,19 +269,51 @@ div.displayPanels:hover {
   width: 100%;
 }
 
-/* .search-bar .MuiInput-underline:before {
+.search-bar .MuiInput-underline:before {
   border: none;
-} */
+  border-color: blue;
+}
 
 @media (min-width: 600px) {
   .search-bar {
     margin: 0 27em;
     padding: 0 2em;
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 25px 25px 25px 25px;
+    margin-top: 0.5%;
   }
 }
 
 .search-icon {
   padding-top: 1.2%;
   padding-right: 1%;
+}
+
+#outlined-password-input {
+  border-radius: 5px 5px 5px 5px;
+}
+
+#username {
+  display: block;
+  margin: 1%;
+}
+
+#password {
+  display: block;
+  margin: 1%;
+}
+
+#new-account {
+  display: block;
+  /* margin-top: 5%;
+  margin-right: 1%; */
+  background-color: orange;
+  color: rgb(0, 0, 0);
+}
+
+.form-actions svg {
+  cursor: pointer;
+}
+
+.form-actions input {
+  cursor: pointer;
 }
