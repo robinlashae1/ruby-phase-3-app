@@ -2,9 +2,13 @@ import { useState } from "react";
 import useValidate from "../hooks/useValidate";
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar'
-// import Stack from '@mui/material/Stack';
+
+
+
+
 
 function LoginForm({ userId, handleUserIdUpdate, handleModal }) {
+  
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
@@ -65,23 +69,25 @@ function LoginForm({ userId, handleUserIdUpdate, handleModal }) {
     setLoginData(currentLoginData => Object.assign({...currentLoginData, [e.target.name]: e.target.value}))
   };
 
-
+  
   let form = <></>;
   const userValidation = useValidate(userId);
   if (userValidation.status === "rejected") {
     form = (
       <>
+         <Button id="new-account" onClick={() => handleModal({name: 'newUserForm'})}>
+          Need an account?
+        </Button>
         <form onSubmit={handleLogin}>
           {message ? <div>{message}</div> : null}
-          <label htmlFor="username">Username: </label>
+          <label htmlFor="username"> </label>
           <input type="text" id="username" name="username" placeholder="username" value={loginData.username} onChange={handleFormChange} disabled={disableForm} />
-          <label htmlFor="password">Password: </label>
+          <label htmlFor="password"> </label>
           <input type="password" id="password" name="password" placeholder="password" value={loginData.password} onChange={handleFormChange} disabled={disableForm} />
-          <input type="submit" value={"Log In"} disabled={disableForm} />
+          <Button id="login-btn" type="submit" disabled={disableForm} color="inherit" >Login</Button>
+
         </form>
-        <button onClick={() => handleModal({name: 'newUserForm'})}>
-          Need an account?
-        </button>
+        
       </>
     );
   } else if (userValidation.status === "success") {
@@ -94,10 +100,13 @@ function LoginForm({ userId, handleUserIdUpdate, handleModal }) {
       </>
     );
   }
+  
+  
 
   return (
     form
   );
+  
 }
 
 export default LoginForm;
