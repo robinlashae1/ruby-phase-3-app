@@ -49,22 +49,22 @@ div.displayPanels:hover {
   z-index: 1;
   transform: scale(1.05);
   transition: ease-in 0.1s;
+  background-color: antiquewhite;
 }
 .displayPanels h3 {
   color: tomato;
   text-align: center;
 }
 #allJobs {
-  /* width: 23%; */
-  padding: 20px;
+  padding: 10px;
   float: left;
   border: 2px solid black;
-  /* background-color: red; */
   margin-right: 5px;
   margin-left: 10px;
   position: relative;
   overflow: overlay;
-  background-color: #464d77;
+  /* background-color: #464d77; */
+  border-radius: 20px 20px 20px 20px;
 }
 #App-header {
   background-color: #f49d6e;
@@ -150,6 +150,7 @@ div.displayPanels:hover {
   height: 90px;
   margin-left: -5%;
   border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
 }
 .communication {
   display: grid;
@@ -180,6 +181,9 @@ div.displayPanels:hover {
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px 5px 5px 5px;
+}
+.comment-btn {
+  cursor: pointer;
 }
 .dropdownitem {
   background-color: #0563af;
@@ -228,4 +232,40 @@ div.displayPanels:hover {
 
 .star-color {
   color: gold;
+}
+
+#add-btn {
+  background-color: orange;
+  color: rgb(0, 0, 0);
+}
+
+.MuiAvatar-circular {
+  margin: 0 10px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+}
+
+.search-bar .MuiTextField-root {
+  width: 100%;
+}
+
+/* .search-bar .MuiInput-underline:before {
+  border: none;
+} */
+
+@media (min-width: 600px) {
+  .search-bar {
+    margin: 0 27em;
+    padding: 0 2em;
+    border-radius: 15px 15px 15px 15px;
+  }
+}
+
+.search-icon {
+  padding-top: 1.2%;
+  padding-right: 1%;
 }

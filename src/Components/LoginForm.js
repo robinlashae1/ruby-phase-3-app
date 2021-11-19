@@ -1,5 +1,8 @@
 import { useState } from "react";
 import useValidate from "../hooks/useValidate";
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar'
+import Stack from '@mui/material/Stack';
 
 function LoginForm({ userId, handleUserIdUpdate, handleModal }) {
   const [loginData, setLoginData] = useState({
@@ -84,8 +87,10 @@ function LoginForm({ userId, handleUserIdUpdate, handleModal }) {
   } else if (userValidation.status === "success") {
     form = (
       <>
-        Welcome, {userValidation.username}
-        <button onClick={handleLogout} disabled={disableForm}>Log Out</button>
+        Welcome, {userValidation.username} 
+        <Avatar src='' />
+        {/* <button onClick={handleLogout} disabled={disableForm}>Log Out</button> */}
+        <Button onClick={handleLogout} disabled={disableForm} color="inherit">Log out</Button>
       </>
     );
   }

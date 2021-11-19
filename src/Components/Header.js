@@ -1,16 +1,39 @@
 import React from 'react'
 import LoginForm from './LoginForm'
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search'
+import TextField from '@mui/material/TextField'
+
+
 
 
 
 function Header({handleSearch, userId, handleUserIdUpdate, handleModal}) {
     return (
-        <div id="App-header">
-            <h3>App Track</h3>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Button startIcon={<AddIcon/>} id="add-btn" onClick={() => handleModal({name: 'jobForm', job: null})}>Add Job Posting</Button>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              AppTrack
+            </Typography>
             <LoginForm userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
-            <input onChange={handleSearch}  type="text" id="search" placeholder="Search" />
-            <button onClick={() => handleModal({name: 'jobForm', job: null})}>Add Job Posting</button>
+          </Toolbar>
+        </AppBar>
+      
+        <div className="search-bar b-radius" style={{border: "1px solid black"}}>
+            <TextField className="text" label="search" variant='standard' onChange={handleSearch}  ></TextField>
+            <SearchIcon className="search-icon" />
         </div>
+       
+      </Box>
+
+       
     )
 }
 

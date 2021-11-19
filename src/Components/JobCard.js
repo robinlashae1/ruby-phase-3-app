@@ -81,7 +81,7 @@ function JobCard({job, communicationData, updateJob, handleModal}) {
                 </ListItemIcon>
                 <h3 className="jobText">{job.company} <EditIcon className="job-card-edit" onClick={() => handleModal({name: 'jobForm', job: job})} /></h3>
                 <h4>{job.position}</h4>
-                <button><AddCommentIcon onClick={() => handleModal({name: 'communicationForm', job: job, modal: null})} /></button>
+                <button class="comment-btn"><AddCommentIcon onClick={() => handleModal({name: 'communicationForm', job: job, modal: null})} /></button>
                 <select onChange={handleChange} id="select-button" value={job.status} disabled={dropdownDisabled}>
                     <option value="wishlist" className="dropdownitem">Wishlist</option>
                     <option value="pending" className="dropdownitem">Applied</option>
