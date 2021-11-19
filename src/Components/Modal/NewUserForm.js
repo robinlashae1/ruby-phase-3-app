@@ -10,14 +10,14 @@ function NewUserForm({ handleModal, handleUserIdUpdate }) {
   const [message, setMessage] = useState();
   const [disabled, setDisabled] = useState(false);
 
-  const resetFormData = () => {
-    setUserFormData({
-      username: '',
-      password: '',
-      passwordConfirm: '',
-      image_url: ''
-    });
-  };
+  // const resetFormData = () => {
+  //   setUserFormData({
+  //     username: '',
+  //     password: '',
+  //     passwordConfirm: '',
+  //     image_url: ''
+  //   });
+  // };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -37,14 +37,14 @@ function NewUserForm({ handleModal, handleUserIdUpdate }) {
       .then(resp => resp.json())
       .then(data => {
         if (data.success) {
-          resetFormData();
-          setMessage('Successfully created account!');
+          // resetFormData();
+          // setMessage('Successfully created account!');
           setLoggedInUser(data);
           handleModal({});
         } else {
           setMessage(data.message);
+          setDisabled(false);
         }
-        setDisabled(false);
       })
   }
 

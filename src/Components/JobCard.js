@@ -1,5 +1,5 @@
 
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import Star from '@mui/icons-material/Star';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -7,10 +7,8 @@ import CallMadeIcon from '@mui/icons-material/CallMade';
 import CallReceivedIcon from '@mui/icons-material/CallReceived';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function JobCard({job, communicationData, updateJob, handleModal}) {
-    const [value, setValue] = useState("default")
     const [dropdownDisabled, setDropdownDisabled] = useState(false);
     // const [likeStar, setLikeStar] = useState(false);
 
@@ -61,7 +59,6 @@ function JobCard({job, communicationData, updateJob, handleModal}) {
         fetch(`http://localhost:9292/applications/${job.id}`, options)
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
                 if (data.success) {
                     updateJob(data.data);
                 } else {
@@ -81,7 +78,7 @@ function JobCard({job, communicationData, updateJob, handleModal}) {
                 </ListItemIcon>
                 <h3 className="jobText">{job.company} <EditIcon className="job-card-edit" onClick={() => handleModal({name: 'jobForm', job: job})} /></h3>
                 <h4>{job.position}</h4>
-                <button class="comment-btn"><AddCommentIcon onClick={() => handleModal({name: 'communicationForm', job: job, modal: null})} /></button>
+                <button className="comment-btn"><AddCommentIcon onClick={() => handleModal({name: 'communicationForm', job: job, modal: null})} /></button>
                 <select onChange={handleChange} id="select-button" value={job.status} disabled={dropdownDisabled}>
                     <option value="wishlist" className="dropdownitem">Wishlist</option>
                     <option value="pending" className="dropdownitem">Applied</option>

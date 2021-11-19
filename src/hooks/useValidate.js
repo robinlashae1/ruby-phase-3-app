@@ -8,7 +8,6 @@ function useValidate(userId) {
   // const userId = localStorage.getItem('user_id');
 
   useEffect(() => {
-    console.log(userId);
     setStatus('pending');
     if (userId === null || loginToken === null) {
       setStatus('rejected');
