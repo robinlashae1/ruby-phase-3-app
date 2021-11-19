@@ -3,16 +3,16 @@ import CommunicationForm from './CommunicationForm';
 import JobForm from './JobForm';
 import NewUserForm from './NewUserForm';
 
-function Modal({modal, handleModal, addJob, updateJob, addCommunication, updateCommunication, handleUserIdUpdate}) {
+function Modal({modal, handleModal, addJob, updateJob, removeJob, addCommunication, updateCommunication, removeCommunication, handleUserIdUpdate}) {
     // const modalClose = () => {
     //     setModalOpen(false)
     // }
 
     let content = null;
     if (modal.name === 'jobForm') {
-        content = <JobForm handleModal={handleModal} addJob={addJob} updateJob={updateJob} job={modal.job} />
+        content = <JobForm handleModal={handleModal} addJob={addJob} updateJob={updateJob} removeJob={removeJob} job={modal.job} />
     } else if (modal.name === 'communicationForm') {
-        content = <CommunicationForm handleModal={handleModal} addCommunication={addCommunication} updateCommunication={updateCommunication} job={modal.job} communication={modal.communication} />
+        content = <CommunicationForm handleModal={handleModal} addCommunication={addCommunication} updateCommunication={updateCommunication} removeCommunication={removeCommunication} job={modal.job} communication={modal.communication} />
     } else if (modal.name === 'newUserForm') {
         content = <NewUserForm  handleModal={handleModal} handleUserIdUpdate={handleUserIdUpdate} />
     }

@@ -3,17 +3,11 @@ import Header from "./Header";
 import {useEffect, useState} from 'react';
 import DisplayPanel from "./DisplayPanel";
 import Modal from "./Modal/Modal";
-import LoginForm from "./LoginForm"
 
 function App() {
   const [jobData, setJobData] = useState([])
   const [communicationData, setCommunicationData] = useState([])
   const [searchFilter, setSearchFilter] = useState(jobData)
-  const[pendingJobs,setPendingJobs]= useState([])
-  const[interviewJobs,setInterviewJobs]=useState([])
-  const[offerJobs,setOfferJobs]=useState([])
-  const[rejectedJobs,setRejectedJobs]=useState([])
-  const[sortedJobs,setSortedJobs]=useState([])
   const [modal, setModal] = useState({})
   // const [modalFilter, setModalFilter] = useState(communicationData)
   const [userId, setUserId] = useState(localStorage.getItem('user_id'));
@@ -47,6 +41,10 @@ function App() {
     )));
   };
 
+  const removeJob = (removedJob) => {
+    setJobData(currentJobData => currentJobData.filter(job => job.id !== removedJob.id));
+  };
+
   const addCommunication = (newCommunication) => {
     setCommunicationData(currentCommunicationData => [...currentCommunicationData, newCommunication]);
   };
@@ -54,7 +52,11 @@ function App() {
   const updateCommunication = (updatedCommunication) => {
     setCommunicationData(currentCommunicationData => currentCommunicationData.map(communication => (
       communication.id === updatedCommunication.id ? updatedCommunication : communication
-    )))
+    )));
+  };
+
+  const removeCommunication = (removedCommunication) => {
+    setCommunicationData(currentCommunicationData => currentCommunicationData.filter(communication => communication.id !== removedCommunication.id));
   };
 
   const handleSearch = (e) => {
@@ -66,7 +68,6 @@ function App() {
   //experminting with sorting
 
   const handleModal = (modalName) => {
-    console.log(modalName);
     setModal(modalName)
   }
   
@@ -76,7 +77,7 @@ function App() {
 
   return (
     <div className="App">
-      {modal.name ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} updateJob={updateJob} addCommunication={addCommunication} updateCommunication={updateCommunication} handleUserIdUpdate={handleUserIdUpdate} /> : null}
+      {modal.name ? <Modal modal={modal} handleModal={handleModal} addJob={addJob} updateJob={updateJob} removeJob={removeJob} addCommunication={addCommunication} updateCommunication={updateCommunication} removeCommunication={removeCommunication} handleUserIdUpdate={handleUserIdUpdate} /> : null}
       <Header handleSearch={handleSearch} userId={userId} handleUserIdUpdate={handleUserIdUpdate} handleModal={handleModal} />
       <div id="jobDisplay">
         <JobContainer jobData={searchFilter.filter((job) => {return job.favorite})} communicationData={communicationData} updateJob={updateJob} handleModal={handleModal} />

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-function CommunicationForm({ handleModal, addCommunication, updateCommunication, job, communication }) {
-  console.log(communication);
+function CommunicationForm({ handleModal, addCommunication, updateCommunication, removeCommunication, job, communication }) {
   const [communicationFormData, setCommunicationFormData] = useState({
     comment: communication ? communication.comment : '',
     received: communication ? communication.received : false,
     time: communication ? communication.time.split("T")[0] : new Date().toISOString().split('T')[0]
   });
   const [message, setMessage] = useState();
+  const [disabled, setDisabled] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +24,7 @@ function CommunicationForm({ handleModal, addCommunication, updateCommunication,
         login_token: localStorage.getItem('login_token')
       })
     };
+    setDisabled(true);
     const patchSuffix = communication ? `/${communication.id}` : '';
     fetch(`http://localhost:9292/communications${patchSuffix}`, options)
       .then(resp => resp.json())
@@ -33,9 +34,27 @@ function CommunicationForm({ handleModal, addCommunication, updateCommunication,
           handleModal({})
         } else {
           setMessage(data.message);
+          setDisabled(false);
         }
-        console.log(data);
       });
+  };
+
+  const handleDeleteCommunication = () => {
+    const options = {
+      method: 'DELETE'
+    };
+    setDisabled(true);
+    fetch(`http://localhost:9292/communications/${communication.id}?user_id=${localStorage.getItem('user_id')}&login_token=${localStorage.getItem('login_token')}`, options)
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.success) {
+          removeCommunication(data.data);
+          handleModal({});
+        } else {
+          setMessage(data.message);
+          setDisabled(false);
+        }
+      })
   };
 
   const handleFormChange = (e) => {
@@ -51,7 +70,7 @@ function CommunicationForm({ handleModal, addCommunication, updateCommunication,
     <form onSubmit={handleFormSubmit}>
       <h4>{communication ? "Edit" : "Add"} Communication for {job.company} ({job.position})</h4>
       {message ? <div>{message}</div> : null}
-      <fieldset>
+      <fieldset disabled={disabled}>
         <label htmlFor="comment">Comment:</label>
         <input type="text" id="comment" name="comment" placeholder="comment" value={communicationFormData.comment} onChange={handleFormChange} />
         <label htmlFor="received">Incoming Communication?</label>
@@ -59,9 +78,9 @@ function CommunicationForm({ handleModal, addCommunication, updateCommunication,
         <label htmlFor="time">Date:</label>
         <input type="date" id="time" name="time" value={communicationFormData.time} onChange={handleFormChange} />
         <br />
-        <span class="form-actions">
+        <span className="form-actions">
           <input type="submit" value={communication ? "Edit Communication" : "Add Communication"} />
-          {communication && <DeleteForeverIcon />}
+          {communication && <DeleteForeverIcon onClick={handleDeleteCommunication} />}
         </span>
       </fieldset>
     </form>

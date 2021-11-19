@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-function JobForm({ handleModal, addJob, updateJob, job }) {
+function JobForm({ handleModal, addJob, updateJob, removeJob, job }) {
   const [jobFormData, setJobFormData] = useState({
     company: job ? job.company : '',
     position: job ? job.position : '',
@@ -30,7 +30,6 @@ function JobForm({ handleModal, addJob, updateJob, job }) {
     fetch(`http://localhost:9292/applications${patchSuffix}`, options)
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
         if (data.success) {
           job ? updateJob(data.data) : addJob(data.data);
           handleModal({});
@@ -39,7 +38,25 @@ function JobForm({ handleModal, addJob, updateJob, job }) {
           setDisabled(false);
         }
       });
-  }
+  };
+
+  const handleDeleteJob = () => {
+    const options = {
+      method: 'DELETE'
+    };
+    setDisabled(true);
+    fetch(`http://localhost:9292/applications/${job.id}?user_id=${localStorage.getItem('user_id')}&login_token=${localStorage.getItem('login_token')}`, options)
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.success) {
+          removeJob(data.data);
+          handleModal({});
+        } else {
+          setMessage(data.message);
+          setDisabled(false);
+        }
+      })
+  };
 
   const handleFormChange = (e) => {
     setJobFormData(currentJobFormData => Object.assign({
@@ -75,9 +92,9 @@ function JobForm({ handleModal, addJob, updateJob, job }) {
         <label htmlFor="favorite">Favorite:</label>
         <input type="checkbox" id="favorite" name="favorite" checked={jobFormData.favorite} onChange={handleFormChange} />
         <br />
-        <span class="form-actions">
+        <span className="form-actions">
           <input type="submit" value={job ? "Edit Posting" : "Add Posting"} />
-          {job && <DeleteForeverIcon />}
+          {job && <DeleteForeverIcon onClick={handleDeleteJob} />}
         </span>
       </fieldset>
     </form>
