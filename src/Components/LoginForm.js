@@ -75,9 +75,9 @@ function LoginForm({ userId, handleUserIdUpdate, handleModal }) {
   if (userValidation.status === "rejected") {
     form = (
       <>
-         <Button id="new-account" onClick={() => handleModal({name: 'newUserForm'})}>
+         {/* <Button id="new-account" onClick={() => handleModal({name: 'newUserForm'})}>
           Need an account?
-        </Button>
+        </Button> */}
         <form onSubmit={handleLogin}>
           {message ? <div>{message}</div> : null}
           <label htmlFor="username"> </label>
