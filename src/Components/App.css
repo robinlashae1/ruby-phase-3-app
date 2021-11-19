@@ -1,6 +1,11 @@
 /* * {
   background: #c3b4a1;
 } */
+body {
+  /* background-color: #c4b89c; */
+  background-color: beige;
+  /* color: #82ac7c; */
+}
 
 .modal-background {
   background-color: rgba(0, 0, 0, 0.514);
@@ -53,7 +58,9 @@ div.displayPanels {
   border-radius: 10px 10px 10px 10px;
   background-color: #adc5af;
   /* box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2); */
-  width: 334px;
+  min-width: 365px;
+  /* min-width: 32%; */
+  padding: 6px;
 }
 div.displayPanels:hover {
   z-index: 1;
@@ -73,9 +80,15 @@ div.displayPanels:hover {
   margin-left: 10px;
   position: relative;
   overflow: overlay;
-  background-color: #adc5af;
+  background-color: #e9dcd9;
   border-radius: 20px 20px 20px 20px;
-  width: 354px;
+  color: black;
+  width: 370px;
+  height: 700px;
+  overflow-y: auto;
+}
+#allJobs h1 {
+  color: #735151;
 }
 #App-header {
   background-color: #f49d6e;
@@ -98,11 +111,11 @@ div.displayPanels:hover {
 }
 #jobDisplay {
   padding-top: 8px;
-  background-color: beige;
+  /* background-color: beige; */
 }
 
 .MuiBox-root {
-  background-color: beige;
+  /* background-color: beige; */
 }
 .job-groups {
   display: flex;
@@ -114,12 +127,15 @@ div.displayPanels:hover {
   /* height: 110px; */
   /* border-style: solid;
       border-width: thin; */
-  margin-top: 3px;
   white-space: normal;
   text-align: center;
   /* line-height: 1px; */
   background-color: #b4d8da;
   padding: 5px;
+  /* min-width: 360px; */
+  width: 95%;
+  margin: auto;
+  margin-top: 5px;
 }
 .job-card-header {
   display: grid;
@@ -187,9 +203,9 @@ div.displayPanels:hover {
   color: rgb(100, 100, 100);
 }
 #select-button {
-  background-color: #0563af;
+  background-color: #e7d6b5;
   border: none;
-  color: white;
+  color: #442c2e;
   padding: 10px 32px;
   text-align: center;
   text-decoration: none;
@@ -197,6 +213,7 @@ div.displayPanels:hover {
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px 5px 5px 5px;
+  font-weight: bold;
 }
 .comment-btn {
   cursor: pointer;

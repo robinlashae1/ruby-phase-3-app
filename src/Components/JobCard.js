@@ -71,7 +71,7 @@ function JobCard({job, communicationData, updateJob, handleModal}) {
 
     return (
         <div className="jobCards">
-            <img src={job.logo_url} alt="Company logo" className="cardImage"  onClick={handleCommunication} />
+            <img src={job.logo_url === '' ? 'https://static.thenounproject.com/png/2043816-200.png' : job.logo_url} alt="Company logo" className="cardImage"  onClick={handleCommunication} />
             <div className="job-card-header">
                 <ListItemIcon className="star">
                     {<Star onClick={handleLikeClick} className={ job.favorite ? "star-color" : null}/>} 
